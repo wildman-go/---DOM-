@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Image Gallery</title>
+        <link rel="stylesheet" href="styles/layout.css" media="screen" />
+    </head>
+    <body>
+        <h1>Snapshots</h1>
+        <ul>
+            <!-- onclick 中的return false，可以阻止链接被点击的默认行为被执行，即页面跳转 -->
+            <li><a href="images/夕阳.jpg" title="a pic of sunset" onclick="showPic(this);return false;">夕阳</a></li>
+            <li><a href="images/水天一色.jpg" title="The blue sky is mirrored in the blue sea" onclick="showPic(this);return false;">水天一色</a></li>
+            <li><a href="images/doggie.jpg" title="a pic of a doggie" onclick="showPic(this);return false;">doggie</a></li>
+        </ul>
+
+        <img id="placeholder" src="images/placeholder.jpg" alt="my image gallery"/>
+        <p id="description">Choose an image.</p>
+        
+        <script src="scripts/showPic.js"></script>
+    </body>
+
+</html>
