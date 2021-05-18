@@ -1,4 +1,4 @@
-window.onload=prepareGallery;
+addLoadEvent(prepareGallery);
 
 function showPic(whichpic){
     var source=whichpic.getAttribute("href");
@@ -28,4 +28,16 @@ function countBodyChildren(){
     var body_element=document.getElementsByTagName("body")[0];
     alert(body_element.childNodes.length);
     alert(body_element.nodeType);
+}
+
+function addLoadEvent(func){
+    var oldOnload=window.onload;
+    if (typeof window.onload != "function"){
+        window.onload=func;
+    }else{
+        window.onload=function(){
+            oldOnload();
+            func();
+        }
+    }
 }
