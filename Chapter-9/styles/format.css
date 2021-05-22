@@ -29,3 +29,12 @@ th, td{
     width: 10em;
     pad: .5em;
 }
+
+.intro{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.odd{
+    background-color: #ffc;
+}
