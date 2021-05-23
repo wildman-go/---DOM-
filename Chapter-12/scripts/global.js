@@ -117,6 +117,13 @@ function prepareSlideshow(){
     // 创建放preview图片的div容器
     var slideshow=document.createElement("div");
     slideshow.setAttribute("id", "slideshow");
+
+    //创建frame
+    var frame=document.createElement("img");
+    frame.setAttribute("src", "images/frame.gif");
+    frame.setAttribute("alt", "");
+    frame.setAttribute("id", "frame");
+    slideshow.appendChild(frame);
     
     // 创建preview 的img
     var preview=document.createElement("img");
