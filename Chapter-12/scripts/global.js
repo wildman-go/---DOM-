@@ -247,8 +247,100 @@ function preparePlaceholder(){
     insertAfter(description, gallery);
     insertAfter(placeholder, description);
 }
+
+
+function highlightRows(){
+    if(!document.getElementsByTagName) return false;
+    var rows=document.getElementsByTagName("tr");
+    for (var i=0;i<rows.length;i++){
+        rows[i].oldClassName=rows[i].className;
+        rows[i].onmouseover=function(){
+            addClass(this, "highlight");
+        }
+        rows[i].onmouseout=function(){
+            this.className=this.oldClassName;
+        }
+    }
+}
+
+function stripTables(){
+    if(!document.getElementsByTagName) return false;
+    var tables=document.getElementsByTagName("table");
+    var odd, rows;
+    for(var i=0;i<tables.length;i++){
+        odd=false;
+        rows=tables[i].getElementsByTagName("tr");
+        for (var j=0;j<rows.length;j++){
+            if(odd==true){
+                addClass(rows[j],"odd")
+                odd=false;
+            }else{
+                odd=true;
+            }
+        }
+    }
+}
+
+function displayAbbreviations(){
+    //取得所有缩略词
+    var abbreviations=document.getElementsByTagName("abbr");
+    if(abbreviations.length<1) return false;
+    var defs = new Array();
+
+    //遍历这些缩略词
+    for (var i=0; i<abbreviations.length;i++){
+        current_abbr=abbreviations[i];
+        if(current_abbr.childNodes.length<1) continue;
+        var definition=current_abbr.getAttribute("title");
+        var key=current_abbr.lastChild.nodeValue;
+        defs[key]=definition;
+    }
+
+    //创建定义列表
+    var dlist=document.createElement("dl");
+
+    //遍历定义
+    for (key in defs){
+        var definition=defs[key];
+        // 创建定义标题
+        var dtitle=document.createElement("dt");
+        var dtitle_text=document.createTextNode(key);
+        dtitle.appendChild(dtitle_text);
+
+        // 创建定义描述
+        var ddesc=document.createElement("dd");
+        var ddesc_text=document.createTextNode(definition);
+        ddesc.appendChild(ddesc_text);
+
+        // 把它们添加到定义列表
+        dlist.appendChild(dtitle);
+        dlist.appendChild(ddesc);
+    }
+    if(dlist.childNodes.length<1) return false; //为了兼容IE7之前的浏览器，它们不承认<abbr>元素
+
+    // 创建标题
+    var header=document.createElement("h2");
+    var header_text=document.createTextNode("Abbreviations");
+    header.appendChild(header_text);
+
+    var articles=document.getElementsByTagName("article");
+    if (articles.length==0) return false;
+
+    var container=articles[0];
+
+    // 把标题添加到页面主体
+    container.appendChild(header);
+    // 把定义列表添加到页面主体
+    container.appendChild(dlist);
+}
+
+
+
 addLoadEvent(highlightPage);
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
 addLoadEvent(preparePlaceholder);
 addLoadEvent(prepareGallery);
+addLoadEvent(stripTables);
+addLoadEvent(highlightRows);
+addLoadEvent(displayAbbreviations);
