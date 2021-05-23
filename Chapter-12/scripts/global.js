@@ -136,7 +136,7 @@ function prepareSlideshow(){
     insertAfter(slideshow, intro);
 
     //遍历intro中的链接
-    var links=intro.getElementsByTagName("a");
+    var links=document.getElementsByTagName("a");
     var destination;
     for (var i=0;i<links.length;i++){
         links[i].onmouseover=function(){
