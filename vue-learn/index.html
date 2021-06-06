@@ -9,9 +9,7 @@
         <div id="app">
             {{message}}
             <div v-bind:id="message"></div>
-            <ul>
-                <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
-            </ul>
+                <todo-list></todo-list>
         </div>
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script>
@@ -38,19 +36,32 @@
 
                 },
                 
+            });
+
+            Vue.component('todo-list',  {
+                template: `
+                <ul>
+                    <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+                </ul>
+                `,
+                data: function(){
+                    return {
+                        list: [{
+                                title: '课程1',
+                                del: false,
+                            },{
+                                title: '课程2',
+                                del: true,
+                                },],
+                            }
+                },
+
             })
+            
             var vm = new Vue({
                 el: '#app',
                 data: {
                     message: 'hello world',
-                    list: [
-                        {title: '课程1',
-                        del: false,
-                        },
-                        {title: '课程2',
-                        del: true,
-                        },
-                    ],
                 }
             })
         </script>
