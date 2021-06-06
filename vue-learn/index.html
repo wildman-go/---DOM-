@@ -9,7 +9,9 @@
         <div id="app">
             {{message}}
             <div v-bind:id="message"></div>
-                <todo-list></todo-list>
+                <todo-list>
+                    <todo-item @delete="handleDelete" v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+                </todo-list>
         </div>
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script>
@@ -44,25 +46,15 @@
             Vue.component('todo-list',  {
                 template: `
                 <ul>
-                    <todo-item @delete="handleDelete" v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+                    <slot></slot>
                 </ul>
                 `,
                 data: function(){
                     return {
-                        list: [{
-                                title: '课程1',
-                                del: false,
-                            },{
-                                title: '课程2',
-                                del: true,
-                                },],
+                        
                             }
                 },
-                methods: {
-                    handleDelete(val){
-                        console.log("handleDelete", val);
-                    }
-                },
+                
 
             })
             
@@ -70,7 +62,19 @@
                 el: '#app',
                 data: {
                     message: 'hello world',
-                }
+                    list: [{
+                                title: '课程1',
+                                del: false,
+                            },{
+                                title: '课程2',
+                                del: true,
+                                },],
+                },
+                methods: {
+                    handleDelete(val){
+                        console.log("handleDelete", val);
+                    }
+                },
             })
         </script>
     </body>
