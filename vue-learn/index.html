@@ -10,7 +10,7 @@
             {{message}}
             <div v-bind:id="message"></div>
             <ul>
-                <li>
+                <li v-for="item in list">
                     <span v-if="!item.del">{{item.title}}</span>
                     <span v-else style="text-decoration: line-through ;">{{item.title}}</span>
 
@@ -24,10 +24,14 @@
                 el: '#app',
                 data: {
                     message: 'hello world',
-                    item: {
-                        title: '课程1',
-                        del:false,
-                    }
+                    list: [
+                        {title: '课程1',
+                        del: false,
+                        },
+                        {title: '课程2',
+                        del: true,
+                        },
+                    ],
                 }
             })
         </script>
