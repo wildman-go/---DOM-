@@ -10,16 +10,35 @@
             {{message}}
             <div v-bind:id="message"></div>
             <ul>
-                <li v-for="item in list">
-                    <span v-if="!item.del">{{item.title}}</span>
-                    <span v-else style="text-decoration: line-through ;">{{item.title}}</span>
-
-                    <button v-show="!item.del">删除</button>
-                </li>
+                <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
             </ul>
         </div>
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script>
+            Vue.component('todo-item', {
+                props: {
+                    title: String,
+                    del: {
+                        type: Boolean,
+                        default: false,
+                    },//提供默认值
+                },
+                template:`
+                    <li>
+                        <span v-if="!del">{{title}}</span>
+                        <span v-else style="text-decoration: line-through ;">{{title}}</span>
+
+                        <button v-show="!del">删除</button>
+                    </li>
+                `,
+                data: function (){
+                    return {}
+                },
+                methods: {
+
+                },
+                
+            })
             var vm = new Vue({
                 el: '#app',
                 data: {
