@@ -17,7 +17,7 @@
                         
                         </template>
                         <!-- 2.5的语法 -->
-                        <span slot="suf-icon">后置图标</span>
+                        <!-- <span slot="suf-icon">后置图标</span> -->
 
                     </todo-item>
                 </todo-list>
@@ -37,7 +37,7 @@
                         <slot name="pre-icon" :value="value"></slot>
                         <span v-if="!del">{{title}}</span>
                         <span v-else style="text-decoration: line-through ;">{{title}}</span>
-                        <slot name="suf-icon"></slot>
+                        <slot name="suf-icon">后置图标默认值</slot>
                         <button v-show="!del" @click="handleClick">删除</button>
                     </li>
                 `,
