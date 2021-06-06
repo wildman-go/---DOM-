@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <input v-model="message">
+    <input :value="message" @input="handleInput">
     {{message}}
     <div v-bind:id="message"></div>
         <todo-list>
@@ -42,6 +43,9 @@ export default {
   methods: {
     handleDelete(val){
       console.log("handleDelete", val);
+    },
+    handleInput(e){
+      this.message=e.target.value;
     }
   },
 }
