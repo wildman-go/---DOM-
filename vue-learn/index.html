@@ -13,6 +13,8 @@
                 <li>
                     <span v-if="!item.del">{{item.title}}</span>
                     <span v-else style="text-decoration: line-through ;">{{item.title}}</span>
+
+                    <button v-show="!item.del">删除</button>
                 </li>
             </ul>
         </div>
