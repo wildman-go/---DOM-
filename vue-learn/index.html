@@ -12,8 +12,8 @@
                 <todo-list>
                     <todo-item @delete="handleDelete" v-for="item in list" :title="item.title" :del="item.del">
                         <!-- 2.6的语法 -->
-                        <template v-slot:pre-icon>
-                            <span>前置图标</span>
+                        <template v-slot:pre-icon="{value}">
+                            <span>前置图标, {{value}}</span>
                         
                         </template>
                         <!-- 2.5的语法 -->
@@ -34,7 +34,7 @@
                 },
                 template:`
                     <li>
-                        <slot name="pre-icon"></slot>
+                        <slot name="pre-icon" :value="value"></slot>
                         <span v-if="!del">{{title}}</span>
                         <span v-else style="text-decoration: line-through ;">{{title}}</span>
                         <slot name="suf-icon"></slot>
@@ -42,7 +42,9 @@
                     </li>
                 `,
                 data: function (){
-                    return {}
+                    return {
+                        value: Math.random(),
+                    }
                 },
                 methods: {
                     handleClick(){
